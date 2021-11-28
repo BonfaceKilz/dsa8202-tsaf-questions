@@ -10,19 +10,23 @@ jobs:
     steps:
     - name: Set up Git repo
       uses: actions/checkout@v2
+      if: startsWith(github.ref, 'refs/tags/')
 
     - name: Install emacs
       uses: purcell/setup-emacs@master
+      if: startsWith(github.ref, 'refs/tags/')
       with:
         version: 27.2
 
     - name: Generate tex file from Emacs
+      if: startsWith(github.ref, 'refs/tags/')
       run: |
         emacs practice-questions.org --batch -f org-latex-export-to-latex --kill
         emacs solutions.org --batch -f org-latex-export-to-latex --kill
 
     - name: Compile LaTex document
       uses: xu-cheng/latex-action@v2
+      if: startsWith(github.ref, 'refs/tags/')
       with:
         root_file: |
           practice-questions.tex
@@ -30,8 +34,17 @@ jobs:
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
+      if: startsWith(github.ref, 'refs/tags/')
       with:
         name: PDF
         path: |
+          practice-questions.pdf
+          solutions.pdf
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: |
           practice-questions.pdf
           solutions.pdf
