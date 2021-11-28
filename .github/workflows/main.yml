@@ -1,0 +1,37 @@
+name: Generate pdf
+
+# Run actions when pushing to the main branch or when you create a
+# PR against it
+on: push
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up Git repo
+      uses: actions/checkout@v2
+
+    - name: Install emacs
+      uses: purcell/setup-emacs@master
+      with:
+        version: 27.2
+
+    - name: Generate tex file from Emacs
+      run: |
+        emacs practice-questions.org --batch -f org-latex-export-to-latex --kill
+        emacs solutions.org --batch -f org-latex-export-to-latex --kill
+
+    - name: Compile LaTex document
+      uses: xu-cheng/latex-action@v2
+      with:
+        root_file: |
+          practice-questions.tex
+          solutions.tex
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: PDF
+        path: |
+          practice-questions.pdf
+          solutions.pdf
