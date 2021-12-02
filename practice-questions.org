@@ -91,7 +91,7 @@ ele.arima <‐ arima(electricity, order=c(1,0,0), seasonal =list(order=c(2,1,0),
 **** Write the presented autoregressive model in the form of ARIMA (p, d, q) (P, D, Q) S
 **** Write down an expression for the fitted model
 
-*** The following cosine function can be used to model the seasonal pattern that might exist in the data.
+*** The following cosine function can be used to model the seasonal pattern that might exist in the data. :noexport:
 #+begin_equation
 f(t) = \alpha cos[(wt) - \theta]
 #+end_equation
