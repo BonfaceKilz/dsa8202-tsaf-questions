@@ -53,7 +53,7 @@ jobs:
         path: practice-questions.pdf
         channel: dsa8202-tsaf
 
-    - name: Slack Notification Demo
+    - name: Slack Notification To Group
       uses: bryannice/gitactions-slack-notification@2.0.0
       if: startsWith(github.ref, 'refs/tags/')
       env:
