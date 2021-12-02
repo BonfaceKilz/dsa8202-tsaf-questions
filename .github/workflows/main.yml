@@ -47,13 +47,13 @@ jobs:
       with:
         token: ${{ secrets.SLACK_TOKEN }}
         path: practice-questions.pdf
-        channel: test-slack
+        channel: dsa8202-tsaf
 
     - name: Post to a Slack channel
       id: slack
       uses: slackapi/slack-github-action@v1.16.0
       with:
-        payload: "{\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"@BonfaceKilz and @here please have a look at the latest practice questions/ solutions release (shared above) for your perusal\"}}]}"
+        payload: "{\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"@<U02CSLZ4934> <@U02CSLZ4934> @BonfaceKilz and @here please have a look at the latest practice questions/ solutions release (shared above) for your perusal\"}}]}"
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.TEST_WEBHOOK }}
         SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
