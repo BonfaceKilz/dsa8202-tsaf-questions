@@ -2,7 +2,10 @@ name: Generate pdf
 
 # Run actions when pushing to the main branch or when you create a
 # PR against it
-on: push
+on:
+  push:
+    tags:
+      - '*'
 
 jobs:
   build_latex:
@@ -10,29 +13,24 @@ jobs:
     steps:
     - name: Set up Git repo
       uses: actions/checkout@v2
-      if: startsWith(github.ref, 'refs/tags/')
 
     - name: Install emacs
       uses: purcell/setup-emacs@master
-      if: startsWith(github.ref, 'refs/tags/')
       with:
         version: 27.2
 
     - name: Generate tex file from Emacs
-      if: startsWith(github.ref, 'refs/tags/')
       run: |
         emacs practice-questions.org --batch -f org-latex-export-to-latex --kill
 
     - name: Compile LaTex document
       uses: xu-cheng/latex-action@v2
-      if: startsWith(github.ref, 'refs/tags/')
       with:
         root_file: |
           practice-questions.tex
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
-      if: startsWith(github.ref, 'refs/tags/')
       with:
         name: PDF
         path: |
@@ -40,14 +38,12 @@ jobs:
 
     - name: Release
       uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
       with:
         files: |
           practice-questions.pdf
 
     - name: Slack upload
       uses: adrey/slack-file-upload-action@master
-      if: startsWith(github.ref, 'refs/tags/')
       with:
         token: ${{ secrets.SLACK_TOKEN }}
         path: practice-questions.pdf
@@ -55,7 +51,6 @@ jobs:
 
     - name: Slack Notification To Group
       uses: bryannice/gitactions-slack-notification@2.0.0
-      if: startsWith(github.ref, 'refs/tags/')
       env:
         SLACK_INCOMING_WEBHOOK: ${{ secrets.TSAF_WEB_HOOK }}
         SLACK_MESSAGE: '@here and @YY Please have a look at the latest practice questions/ solutions release (shared above) for your perusal'
