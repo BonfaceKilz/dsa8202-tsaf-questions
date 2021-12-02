@@ -53,7 +53,7 @@ jobs:
       id: slack
       uses: slackapi/slack-github-action@v1.16.0
       with:
-        channel-id: 'test-slack'
-        slack-message: '@here please have a look at the latest practice questions/ solutions release (shared above) for your perusal'
+        payload: "{\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"@here and @BonfaceKilz please have a look at the latest practice questions/ solutions release (shared above) for your perusal\"}}]}"
       env:
-        SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
+        SLACK_WEBHOOK_URL: ${{ secrets.TEST_WEBHOOK }}
+        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
