@@ -1,0 +1,25 @@
+* Introduction
+
+This repository contains some practice questions for DSA 8202.  The
+goal is to aggregate questions from different places here for our
+revision; and in a bid to gain better intuition behind some TSAF
+concepts.
+
+* Basic HOWTO
+
+Questions are maintained using [[https://orgmode.org/][org mode]] since it's easier than tex to
+format in [[https://www.gnu.org/software/emacs/][Emacs]].  To build the documents, make sure you have Emacs and
+LaTex distribution set up in your system.  To build the document
+within Emacs, run =M X org-latex-export-to-pdf=.  Alternatively, to
+build the document outside emacs, run:
+
+: emacs practice-questions.org --batch -f org-latex-export-to-latex --kill
+
+
+* How To Get The PDF
+
+The obvious way is to build a PDF document as described above.  Also
+since this is a running document, every significant update will have a
+tag.  Whenever a tag is pushed upstream, a notification is sent to the
+groups Slack channel with the PDF attached; in addition to a release
+being made.
