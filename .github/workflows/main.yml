@@ -47,13 +47,13 @@ jobs:
       with:
         token: ${{ secrets.SLACK_TOKEN }}
         path: practice-questions.pdf
-        channel: dsa8202-tsaf
+        channel: test-slack
 
     - name: Post to a Slack channel
       id: slack
       uses: slackapi/slack-github-action@v1.16.0
       with:
-        channel-id: 'dsa8202-tsaf'
-        slack-message: '@here and @YY please have a look at the latest practice questions/ solutions release (shared above) for your perusal'
+        channel-id: 'test-slack'
+        slack-message: '@here please have a look at the latest practice questions/ solutions release (shared above) for your perusal'
       env:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
