@@ -55,5 +55,5 @@ jobs:
       with:
         payload: "{\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"<@U02GYNYSJBT> and @here please have a look at the latest practice questions/ solutions release (shared above) for your perusal\"}}]}"
       env:
-        SLACK_WEBHOOK_URL: ${{ secrets.TSAF_WEBHOOK }}
+        SLACK_WEBHOOK_URL: ${{ secrets.TSAF_WEB_HOOK }}
         SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
